@@ -29,7 +29,15 @@ public class SpartanGetRequests {
 
         Assertions.assertEquals(response.contentType(),"application/json");
         Assertions.assertEquals(response.statusCode(),200);
-        Assertions.assertTrue(response.body().asString().contains("Fidola"));
+        Assertions.assertTrue(response.body().asString().contains("Fidole"));
         response.prettyPrint();
+    }
+    @Test
+    public void test3(){
+        Response response = RestAssured.get(url+"/api/hello");
+        Assertions.assertEquals(response.statusCode(),200);
+        Assertions.assertEquals(response.contentType(),"text/plain;charset=UTF-8");
+        Assertions.assertTrue(response.headers().hasHeaderWithName("Date"));
+        System.out.println("response.header(\"Date\") = " + response.header("Date"));
     }
 }
