@@ -29,7 +29,7 @@ public class SpartanGetRequests {
 
         Assertions.assertEquals(response.contentType(),"application/json");
         Assertions.assertEquals(response.statusCode(),200);
-        Assertions.assertTrue(response.body().asString().contains("Fidole"));
-        response.prettyPrint()
+        Assertions.assertTrue(response.body().asString().contains("Fidola"));
+        response.prettyPrint();
     }
 }
