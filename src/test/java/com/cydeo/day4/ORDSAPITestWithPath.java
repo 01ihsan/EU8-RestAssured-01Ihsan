@@ -9,13 +9,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static io.restassured.RestAssured.*;
 
 public class ORDSAPITestWithPath extends HRTestBase {
 
     @Test
     public void test1() {
-        Response response = given().accept(ContentType.JSON).
+        Response response = RestAssured.given().accept(ContentType.JSON).
                 queryParam("q", "{\"region_id\":2}")
                 .when().get("/countries/");
         assertEquals(response.statusCode(), 200);
