@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -19,5 +20,12 @@ public class JSONtoJAVATest extends SpartanTestBase {
         Map<String, Object> jsonMap = response.as(Map.class);
         System.out.println(jsonMap.toString());
         assertThat(jsonMap.get("name").toString(),equalTo("Meta"));
+    }
+    @Test
+    public void getAllSpartans(){
+        Response response = RestAssured.get("/api/spartans")
+                .then().statusCode(200).extract().response();
+        List<Map<String,Object>> jsonList = response.as(List.class);
+        System.out.println(jsonList.get(14).get("name"));
     }
 }
