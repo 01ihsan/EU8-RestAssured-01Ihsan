@@ -54,6 +54,6 @@ public class HamcrestMatchersApiTest extends SpartanTestBase {
 
         assertThat(jsonPath.getList("items.first_name"), hasSize(5));
 
-        assertThat(jsonPath.getList("items.first_name"),hasItem("Alexander"));
+        assertThat(jsonPath.getList("items.first_name"), hasItem("Alexander"));
     }
 }

@@ -12,12 +12,12 @@ import static org.hamcrest.Matchers.*;
 
 public class SpartanHamcrestTest extends SpartanTestBase {
     @Test
-    public void test1(){
+    public void test1() {
         List<String> names = RestAssured.given().accept(ContentType.JSON)
-                .and().queryParams("nameContains","j","gender","Male")
+                .and().queryParams("nameContains", "j", "gender", "Male")
                 .when().get("/api/spartans/search")
                 .then().statusCode(200)
-                .and().body("totalElement",is(3))
+                .and().body("totalElement", is(3))
                 .extract().response().jsonPath().getList("content.name");
 
         System.out.println(names);
