@@ -1,6 +1,7 @@
 package com.cydeo.day6;
 
 import com.cydeo.Utilities.HRTestBase;
+import com.cydeo.pojo.Employee;
 import com.cydeo.pojo.Link;
 import com.cydeo.pojo.Region;
 import io.restassured.RestAssured;
@@ -11,7 +12,8 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
     @Test
     public void test1(){
         JsonPath jsonPath= RestAssured.get("/regions")
-                .then().statusCode(200).extract().jsonPath();
+                .then().statusCode(200)
+                .extract().jsonPath();
         Region region1=jsonPath.getObject("items[0]", Region.class);
         System.out.println(region1);
         System.out.println(region1.getLinks().get(0).getHref());
@@ -19,5 +21,14 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
         System.out.println(link1.getHref());
         String href1= jsonPath.getObject("items[0].links[0].href",String.class);
         System.out.println(href1);
+        System.out.println(region1.getRegionID());
+    }
+    @Test
+    public void test2(){
+        JsonPath jsonPath = RestAssured.get("/employees")
+                .then().statusCode(200)
+                .extract().jsonPath();
+        Employee employee = jsonPath.getObject("items[0]",Employee.class);
+        System.out.println(employee);
     }
 }
