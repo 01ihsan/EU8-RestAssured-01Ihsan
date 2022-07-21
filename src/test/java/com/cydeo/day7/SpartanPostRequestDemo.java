@@ -1,6 +1,7 @@
 package com.cydeo.day7;
 
 import com.cydeo.Utilities.SpartanTestBase;
+import com.cydeo.pojo.Spartan;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -50,6 +51,26 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
         assertThat(response.path("success"), is(expectedMessage));
         assertThat(response.path("data.name"), is("Severus"));
         assertThat(response.path("data.phone"), is(1234567895));
+        response.prettyPrint();
+    }
+
+    @Test
+    public void test3() {
+        Spartan spartan = new Spartan();
+        spartan.setGender("Male");
+        spartan.setName("Severus");
+        spartan.setPhone(1234567896);
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON).body(spartan).log().all()
+                .when().post("/api/spartans");
+
+        assertThat(response.statusCode(), is(201));
+        assertThat(response.contentType(), is("application/json"));
+        String expectedMessage = "A Spartan is Born!";
+        assertThat(response.path("success"), is(expectedMessage));
+        assertThat(response.path("data.name"), is("Severus"));
+        assertThat(response.path("data.phone"), is(1234567896));
         response.prettyPrint();
     }
 }
